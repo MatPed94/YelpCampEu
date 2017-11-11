@@ -7,3 +7,11 @@
 .delete-form {
     display: inline;
 }
+.col-centered{
+    float: none;
+    margin: 0 auto;
+}
+#sizing {
+    width: 30%;
+    margin: 0 auto;
+}
