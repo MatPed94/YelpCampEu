@@ -27,7 +27,7 @@ router.post("/", middleware.isLoggedIn, function(req, res){
     var newCampground = {name: name, price: price, image: image, description: desc, author: author};
     Campground.create(newCampground, function (err, newlyCreated){
         if (err) {
-            req.flash("error", err);
+            req.flash("error", err.message);
             console.log(err);
         } else {
             req.flash("success", "Success! Thank you for submitting a new campground.");

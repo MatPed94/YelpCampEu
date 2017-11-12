@@ -33,9 +33,11 @@ router.get('/login', (req, res) => res.render("login"));
 //Handles login logic
 router.post("/login", passport.authenticate('local', 
     {
-        successRedirect: '/campgrounds',  // ADD REDIRECT TO THE PAGE USER WAS PREVIOUSLY ON
-        failureRedirect: '/login' 
+        failureRedirect: '/login',
+        failureFlash: true
     }), function(req, res) {
+            res.redirect(req.session.returnTo || '/');
+            delete req.session.returnTo;
 });
 
 //Logout
