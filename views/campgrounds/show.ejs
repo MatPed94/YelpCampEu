@@ -36,8 +36,15 @@
                 <% campground.comments.forEach(function(comment){ %>
                 <div class="row">
                     <div class="col-md-12">
-                        <strong><%= comment.author.username %></strong>
-                        <span class="pull-right"><%= moment(comment.createdAt).fromNow() %></span>
+                        <strong><%= comment.author.username %></strong> 
+                        
+                        
+                        <span class="pull-right"> for <%= moment(comment.createdAt).fromNow() %>
+                            <%if (comment.edited) { %>
+                                <em> (edited)</em>
+                            <% } %>
+                        </span>
+                        
                         <p>
                             <%= comment.text %>
                         </p>

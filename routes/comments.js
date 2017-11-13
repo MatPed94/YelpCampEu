@@ -56,16 +56,37 @@ router.get("/:comment_id/edit", middleware.checkCommentOwnership, function(req, 
 });
 
 // COMMENT UPDATE
+// router.put("/:comment_id", middleware.checkCommentOwnership, function(req, res) {
+//     Comment.findByIdAndUpdate(req.params.comment_id, req.body.comment, function(err, updatedComment){
+//         if (err) {
+//             res.redirect("back");
+//         } else {
+//             req.flash("success", "Comment updated");
+//             res.redirect("/campgrounds/" + req.params.id);
+//         }
+//     });
+// });
+
 router.put("/:comment_id", middleware.checkCommentOwnership, function(req, res) {
     Comment.findByIdAndUpdate(req.params.comment_id, req.body.comment, function(err, updatedComment){
         if (err) {
             res.redirect("back");
         } else {
-            req.flash("success", "Comment updated");
-            res.redirect("/campgrounds/" + req.params.id);
+            Comment.update({ _id :req.params.comment_id }, { $set: { edited: true }}, function (err, editedTrue) {
+                if (err) {
+                    res.redirect("back");
+                } else {
+                    req.flash("success", "Comment updated");
+                    res.redirect("/campgrounds/" + req.params.id);
+                }
+            });
+            
         }
     });
 });
+
+
+
 
 // COMMENT DESTROY
 router.delete("/:comment_id", middleware.checkCommentOwnership, function(req, res) {
