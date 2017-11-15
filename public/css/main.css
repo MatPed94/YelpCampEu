@@ -15,10 +15,3 @@
     width: 30%;
     margin: 0 auto;
 }
-.row.display-flex {
-  display: flex;
-  flex-wrap: wrap;
-}
-.thumbnail {
-  height: 100%;
-}
