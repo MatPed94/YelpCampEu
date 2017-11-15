@@ -72,4 +72,19 @@ middlewareObj.isLoggedIn = function(req, res, next){
     res.redirect("/login");
 }
 
+middlewareObj.commentNoChange = function(req, res, next) {
+    Comment.findById(req.params.comment_id, function(err, foundComment) {
+        if (err) {
+            console.log(err);
+        } else {
+            if (req.body.comment.text === foundComment.text) {
+                console.log("Nothing has changed");
+                res.redirect("/campgrounds/" + req.params.id);
+            } else {
+                next();
+            }
+        }
+    });
+}
+
 module.exports = middlewareObj;
